@@ -18,16 +18,23 @@ def main():
         required=True,
         help="Name of the audio file located in assets/inputs/ (e.g., input.wav)"
     )
+    parser.add_argument(
+        "--outputname", "-o",
+        required=False,
+        help="Optional name for the output directory under assets/outputs; defaults to the input file base name"
+    )
     args = parser.parse_args()
 
-    # Define paths
+    # Define input path
     input_path = os.path.join("assets", "inputs", args.filename)
     if not os.path.isfile(input_path):
         print(f"Error: Input file '{input_path}' not found.")
         return
 
+    # Determine output directory name
     base_name = os.path.splitext(args.filename)[0]
-    output_dir = os.path.join("assets", "outputs", base_name)
+    dir_name = args.outputname if args.outputname else base_name
+    output_dir = os.path.join("assets", "outputs", dir_name)
     os.makedirs(output_dir, exist_ok=True)
 
     # Configure logging
@@ -37,7 +44,7 @@ def main():
         level=logging.INFO,
         format="%(asctime)s %(levelname)s: %(message)s"
     )
-    logging.info(f"Started processing '{args.filename}'")
+    logging.info(f"Started processing '{args.filename}' into '{output_dir}'")
 
     try:
         # Step 1: Speech-to-text
@@ -62,7 +69,7 @@ def main():
         logging.info(f"Script generated, saved to {script_file}")
 
         # Step 4: Text-to-speech
-        audio_out = os.path.join(output_dir, f"{base_name}_podcast.wav")
+        audio_out = os.path.join(output_dir, f"{dir_name}_podcast.wav")
         generate_audio(script_text, audio_out)
         logging.info(f"TTS completed, audio saved to {audio_out}")
 

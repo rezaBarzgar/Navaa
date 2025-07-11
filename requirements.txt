@@ -1,4 +1,15 @@
-python-dotenv
-gtts
-pydub
-elevenlabs
+# requirements.txt
+
+# Core dependencies
+openai>=0.28.0
+python-dotenv>=0.21.0
+
+# (Optional) For local audio playback/testing
+# ffmpeg is required on the system path but not via pip
+
+# If you ever re-add a Gradio interface
+# gradio>=3.0
+
+# If switching back to gTTS/TTS libraries
+# gtts>=2.3.1
+# pydub>=0.25.1

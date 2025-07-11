@@ -15,13 +15,12 @@ def generate_script(english_text: str) -> str:
     body covering each point, and a conclusion.
     """
     messages = [
-        {
-            "role": "system",
-            "content": (
-                "You are an expert podcast writer. "
-                "Write engaging podcast scripts in Persian (Farsi)."
-            )
-        },
+        dict(role="system", content=(
+            "You are an expert podcast writer. "
+            "add interesting, correct information to the key concepts."
+            "Write engaging podcast scripts in Persian (Farsi)."
+            "your answer is going to use as a script for a text to speech model. avoid any tags like [music] or [host]"
+        )),
         {
             "role": "user",
             "content": (
@@ -29,12 +28,13 @@ def generate_script(english_text: str) -> str:
                 "Now draft a Persian podcast script (~300–500 words) "
                 "with an introduction, body, and conclusion, in a warm, "
                 "conversational tone."
+                "your answer is going to use as a script for a text to speech model. avoid any tags like [music] or [host]"
             )
         }
     ]
 
     response = client.chat.completions.create(
-        model="gpt-3.5-turbo",   # or "gpt-4" if available
+        model="gpt-4.1-mini",   # or "gpt-4" if available
         messages=messages,
         temperature=0.7,
         max_tokens=1500
