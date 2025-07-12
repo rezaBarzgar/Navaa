@@ -8,7 +8,8 @@ python-dotenv>=0.21.0
 # ffmpeg is required on the system path but not via pip
 
 # If you ever re-add a Gradio interface
-# gradio>=3.0
+# (Higher Versions are not working properly with File Component in Interface)
+gradio = 3.50.2
 
 # If switching back to gTTS/TTS libraries
 # gtts>=2.3.1
