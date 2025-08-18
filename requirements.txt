@@ -3,6 +3,8 @@
 # Core dependencies
 openai>=0.28.0
 python-dotenv>=0.21.0
+langgraph>=0.0.21
+langchain-openai>=0.0.8
 
 # (Optional) For local audio playback/testing
 # ffmpeg is required on the system path but not via pip
